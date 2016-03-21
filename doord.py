@@ -753,6 +753,10 @@ class AuxMonitor(KillableThread):
     # Called from other threads
     def bell_trigger(self, duration):
         with self:
+            # Tell Sauron to show the outside camera
+            # Doesn't check that Sauron is turned on though...
+            self.g.irc.send("Doorbell!")
+            self.g.irc.send("Sauron-tv: cam view outside")
             self.bell_duration = duration
             self._update()
 
